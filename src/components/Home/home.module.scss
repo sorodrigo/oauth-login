@@ -1,0 +1,44 @@
+@import 'styles/settings';
+
+.home {
+  height: 100vh;
+  padding: 62px 0 0;
+  background-color: $dark-fill;
+}
+
+.loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
+  background-color: $dark-accent;
+}
+
+.githubLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px $white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: $white;
+  cursor: pointer;
+
+  .iconContainer {
+    display: inline-block;
+    width: 50px;
+    background-color: transparent;
+  }
+
+  &:hover {
+    background-color: rgba($white, 0.1);
+  }
+}
+
+.icon {
+  fill: white;
+  margin: 0 8px 0 0;
+}

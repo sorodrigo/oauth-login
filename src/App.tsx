@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import { NOT_FOUND } from "redux-first-router";
+import { useSelector } from 'react-redux';
 
-const App: React.FC = () => {
+const pages: { [name: string]: React.ElementType } = {
+  home: React.lazy(() => import('./components/Home/home.component')),
+  [NOT_FOUND]: React.lazy(() => import('./components/NotFound/not-found.component'))
+};
+
+const App: React.FC = (props) => {
+  const route: string = useSelector((state: any) => state.location.type);
+  const Page = pages[route];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="" className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Suspense fallback={null}>
+        <Page />
+      </Suspense>
+    </main>
   );
 };
 
