@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "oauth-login",
+  "routes": [
+    { "src": "/proxy", "dest": "/api/proxy.ts" }
+  ],
+  "env": {
+    "CLIENT_ID": "@app-client-id",
+    "REDIRECT_URL": "@app-redirect-url",
+    "CLIENT_SECRET": "@app-client-secret",
+    "NOW_GITHUB_API_URL": "https://github.com/login/oauth/access_token"
+  },
+  "build": {
+    "env": {
+      "SKIP_PREFLIGHT_CHECK": "true",
+      "SASS_PATH": "src:node_modules",
+      "REACT_APP_CLIENT_ID": "@app-client-id"
+    }
+  }
+}

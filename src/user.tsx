@@ -26,17 +26,11 @@ const setToken = (token: string) => ({
 });
 
 export const getToken = (code: number, state: string) => (dispatch: any) =>
-  fetch('https://github.com/login/oauth/access_token', {
+  fetch('https://oauth-login.now.sh/proxy', {
     method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
     body: JSON.stringify({
       code,
-      state,
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      redirect_uri: 'http://localhost:3000/callback',
-      client_secret: process.env.REACT_APP_CLIENT_SECRET
+      state
     })
   })
     .then(res => res.json())
