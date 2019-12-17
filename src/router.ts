@@ -5,18 +5,25 @@ import qs from 'query-string';
 type Route = {
   path: string,
   title?: string,
+  page: string,
   thunk?: () => void
 };
 
-type Routes = { [name: string]: Route };
+export type Routes = { [name: string]: Route };
 
 export const routes: Routes = {
   home: {
     path: '/',
+    page: 'home',
     title: 'Home - oauth-login'
+  },
+  callback: {
+    path: '/callback',
+    page: 'message'
   },
   [NOT_FOUND]: {
     path: '/404',
+    page: 'message',
     thunk: () => replace('/404')
   }
 };
@@ -34,8 +41,6 @@ const config: object = {
 
     return route;
   },
-  // onBeforeChange: (dispatch, getState, { action }) => {},
-  // onAfterChange: (dispatch, getState, { action }) => {},
   restoreScroll: restoreScroll()
 };
 

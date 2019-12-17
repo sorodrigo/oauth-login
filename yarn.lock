@@ -1367,6 +1367,14 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/redux-first-router-link@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@types/redux-first-router-link/-/redux-first-router-link-1.4.4.tgz#d9ee41404f730416a1b9f4ad3d14b448d9c0f58f"
+  integrity sha512-amvEgN9sVH3xgbBbngIAgT/eJp/cv5bvnpkOhQOOTs+99nCqUlhEgkJZ9hQFiY1uhENhLYI9z9FS02VmX4W8gw==
+  dependencies:
+    "@types/react" "*"
+    "@types/redux-first-router" "*"
+
 "@types/redux-first-router-restore-scroll@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@types/redux-first-router-restore-scroll/-/redux-first-router-restore-scroll-1.2.1.tgz#17e3403fbb38a9c401ed348e73fed4df9ba8dd8c"
