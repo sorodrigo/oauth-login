@@ -1,8 +1,9 @@
 import React, { Suspense, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NOT_FOUND } from 'redux-first-router';
 import { useOAuthState } from './hooks/use-oauth-state.hook';
 import { Routes } from './router';
+import { getToken } from './user';
 
 const pages: { [name: string]: React.ElementType } = {
   home: React.lazy(() => import('./components/Home/home.component')),
@@ -17,18 +18,20 @@ const messages: { [type: string]: { code?: number; text: string } } = {
 
 const App: React.FC = () => {
   const oAuthState = useOAuthState();
-  const { type, routesMap, query = {} }: { type: string; routesMap: Routes, query: any } = useSelector(
-    (state: any) => state.location
-  );
+  const {
+    type,
+    routesMap,
+    query = {}
+  }: { type: string; routesMap: Routes; query: any } = useSelector((state: any) => state.location);
+  const dispatch = useDispatch();
   const isValidQuery = query.state === oAuthState;
 
   useEffect(() => {
     if (isValidQuery) {
-      alert('dispatching user login with code: ' + query.code);
+      dispatch(getToken(query.code, query.state));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   const Page = pages[routesMap[type].page];
   let messageProps = messages[type];

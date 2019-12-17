@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, combineReducers, compose } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import App from './App';
 import router from './router';
 import * as serviceWorker from './serviceWorker';
+import user from './user';
 
 import './styles/index.scss';
 
@@ -16,9 +18,11 @@ const reduxDevTools =
 
 const composeEnhancers = (process.env.NODE_ENV === 'development' && reduxDevTools) || compose;
 const reducers = combineReducers({
+  user,
   location: router.reducer
 });
-const store = createStore(reducers, undefined, composeEnhancers(router.enhancer));
+const middleware = [thunk];
+const store = createStore(reducers, undefined, composeEnhancers(router.enhancer, applyMiddleware(...middleware)));
 
 ReactDOM.render(
   <Provider store={store}>
