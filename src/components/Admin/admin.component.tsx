@@ -7,7 +7,7 @@ const Dashboard = React.lazy(() => import('../Dashboard/dashboard.container'));
 const Settings = React.lazy(() => import('../Settings/settings.component'));
 
 type Props = {
-  section: 'dashboard' | 'settings';
+  section: string;
   getDetails: () => void;
   details: UserDetails;
 };

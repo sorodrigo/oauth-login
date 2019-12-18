@@ -6,9 +6,15 @@ import thunk from 'redux-thunk';
 import App from './App';
 import router from './router';
 import * as serviceWorker from './serviceWorker';
-import user from './user';
+import user, { UserState } from './user';
+import { LocationState } from 'redux-first-router';
 
 import './styles/index.scss';
+
+export type AppState = {
+  location: LocationState<any>;
+  user: UserState;
+};
 
 const reduxDevTools =
   // @ts-ignore
@@ -22,7 +28,11 @@ const reducers = combineReducers({
   location: router.reducer
 });
 const middleware = [thunk, router.middleware];
-const store = createStore(reducers, undefined, composeEnhancers(router.enhancer, applyMiddleware(...middleware)));
+const store = createStore(
+  reducers,
+  undefined,
+  composeEnhancers(router.enhancer, applyMiddleware(...middleware))
+);
 
 ReactDOM.render(
   <Provider store={store}>

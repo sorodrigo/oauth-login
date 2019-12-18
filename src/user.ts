@@ -1,6 +1,8 @@
 import { AnyAction } from 'redux';
 import { batch } from 'react-redux';
 import { redirect } from 'redux-first-router';
+import { ThunkDispatch } from 'redux-thunk';
+import { AppState } from './index';
 
 const USER__SET_TOKEN = 'USER__SET_TOKEN';
 const USER__SET_DETAILS = 'USER__SET_DETAILS';
@@ -23,7 +25,7 @@ export type UserRepo = {
   stargazers_count: number;
 };
 
-type UserState = {
+export type UserState = {
   token: string | null;
   details: UserDetails | null;
   repos: Array<UserRepo>;
@@ -71,7 +73,9 @@ const setRepos = (repos: Array<UserRepo>) => ({
   payload: repos
 });
 
-export const getToken = (code: number, state: string) => (dispatch: any) =>
+export const getToken = (code: number, state: string) => (
+  dispatch: ThunkDispatch<AppState, any, AnyAction>
+) =>
   fetch('https://oauth-login.now.sh/proxy', {
     method: 'POST',
     body: JSON.stringify({
@@ -87,7 +91,10 @@ export const getToken = (code: number, state: string) => (dispatch: any) =>
       })
     );
 
-export const getDetails = () => (dispatch: any, getState: any) => {
+export const getDetails = () => (
+  dispatch: ThunkDispatch<AppState, any, AnyAction>,
+  getState: () => AppState
+) => {
   const { user } = getState();
   fetch('https://api.github.com/user', {
     headers: {
@@ -98,7 +105,10 @@ export const getDetails = () => (dispatch: any, getState: any) => {
     .then(data => dispatch(setDetails(data)));
 };
 
-export const getRepos = () => (dispatch: any, getState: any) => {
+export const getRepos = () => (
+  dispatch: ThunkDispatch<AppState, any, AnyAction>,
+  getState: () => AppState
+) => {
   const { user } = getState();
   fetch(`https://api.github.com/user/repos`, {
     headers: {

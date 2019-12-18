@@ -1,6 +1,7 @@
 import { connectRoutes, NOT_FOUND, replace } from 'redux-first-router';
 import restoreScroll from 'redux-first-router-restore-scroll';
 import qs from 'query-string';
+import { AppState } from './index';
 
 type Route = {
   path: string;
@@ -43,7 +44,7 @@ const config: object = {
   basename: '/',
   notFoundPath: '/404',
   querySerializer: qs,
-  title: (state: any) => {
+  title: (state: AppState) => {
     const route = routes[state.location.type];
 
     if (!route.title) {

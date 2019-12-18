@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import Dashboard from './dashboard.component';
 import { getRepos } from '../../user';
+import { AppState } from '../../index';
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
   repos: state.user.repos
 });
 

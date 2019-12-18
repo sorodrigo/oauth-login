@@ -2,8 +2,8 @@ import React, { Suspense, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NOT_FOUND } from 'redux-first-router';
 import { useOAuthState } from './hooks/use-oauth-state.hook';
-import { Routes } from './router';
 import { getToken } from './user';
+import { AppState } from './index';
 
 const pages: { [name: string]: React.ElementType } = {
   home: React.lazy(() => import('./components/Home/home.component')),
@@ -20,16 +20,12 @@ const messages: { [type: string]: { code?: number; text: string; redirectTo?: st
 const App: React.FC = () => {
   const oAuthState = useOAuthState();
   const dispatch = useDispatch();
-  const {
-    type,
-    routesMap,
-    query = {}
-  }: { type: string; routesMap: Routes; query: any } = useSelector((state: any) => state.location);
-  const isLoggedIn = useSelector((state: any) => !!state.user.token);
+  const { type, routesMap, query = {} } = useSelector((state: AppState) => state.location);
+  const isLoggedIn = useSelector((state: AppState) => !!state.user.token);
   const isValidQuery = query.state === oAuthState;
 
   useEffect(() => {
-    if (isValidQuery) {
+    if (isValidQuery && typeof query.code === 'number' && typeof query.state === 'string') {
       dispatch(getToken(query.code, query.state));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
