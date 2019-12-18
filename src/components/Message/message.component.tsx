@@ -13,7 +13,7 @@ function Message(props: Props) {
   const { code, text, redirectTo } = props;
   const dispatch = useDispatch();
   useEffect(() => {
-    const timeout = setTimeout(() => dispatch(redirect({ type: redirectTo })), 1000);
+    const timeout = redirectTo && setTimeout(() => dispatch(redirect({ type: redirectTo })), 1000);
     return () => {
       if (timeout) {
         clearTimeout(timeout);
