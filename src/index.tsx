@@ -21,7 +21,7 @@ const reducers = combineReducers({
   user,
   location: router.reducer
 });
-const middleware = [thunk];
+const middleware = [thunk, router.middleware];
 const store = createStore(reducers, undefined, composeEnhancers(router.enhancer, applyMiddleware(...middleware)));
 
 ReactDOM.render(

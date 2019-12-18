@@ -1,0 +1,87 @@
+@import 'styles/settings';
+
+.nav {
+  height: 10vh;
+  background-color: $dark-accent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .nameContainer {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 20px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    margin: 0 8px 0 0;
+    border-radius: 4px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .name {
+    display: inline-block;
+    font-size: 18px;
+    color: $white;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .links {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+  }
+
+  .link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: $white;
+    margin: 0 18px 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 4px;
+      width: 0%;
+      background-color: $black;
+      transform: translateX(-50%);
+      transition: width ease-out 150ms;
+      will-change: width;
+    }
+
+    &:hover {
+      &:after {
+        width: 50%;
+      }
+    }
+  }
+
+  .activeLink::after {
+    width: 50%;
+  }
+}
+
+.admin {
+  height: 90vh;
+  background-color: $dark-fill;
+}

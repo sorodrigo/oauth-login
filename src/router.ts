@@ -6,6 +6,7 @@ type Route = {
   path: string,
   title?: string,
   page: string,
+  auth?: boolean,
   thunk?: () => void
 };
 
@@ -20,6 +21,11 @@ export const routes: Routes = {
   callback: {
     path: '/callback',
     page: 'message'
+  },
+  dashboard: {
+    path: '/dashboard',
+    page: 'admin',
+    auth: true
   },
   [NOT_FOUND]: {
     path: '/404',
