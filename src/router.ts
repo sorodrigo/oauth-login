@@ -3,11 +3,11 @@ import restoreScroll from 'redux-first-router-restore-scroll';
 import qs from 'query-string';
 
 type Route = {
-  path: string,
-  title?: string,
-  page: string,
-  auth?: boolean,
-  thunk?: () => void
+  path: string;
+  title?: string;
+  page: string;
+  auth?: boolean;
+  thunk?: () => void;
 };
 
 export type Routes = { [name: string]: Route };
@@ -24,6 +24,11 @@ export const routes: Routes = {
   },
   dashboard: {
     path: '/dashboard',
+    page: 'admin',
+    auth: true
+  },
+  settings: {
+    path: '/settings',
     page: 'admin',
     auth: true
   },

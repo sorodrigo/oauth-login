@@ -1,5 +1,47 @@
 @import 'styles/settings';
 
 .settings {
+  height: 100vh;
+  padding: 62px 0;
+  background-color: $dark-fill;
+}
 
+.profile {
+  margin: auto;
+  background-color: $dark-accent;
+  width: 275px;
+
+  .avatar {
+    height: 275px;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .description {
+    padding: 8px 18px;
+  }
+
+  .name,
+  .login {
+    display: block;
+  }
+
+  .name {
+    font-size: 24px;
+    line-height: 1.5;
+    color: $white;
+    font-weight: 700;
+  }
+
+  .login {
+    font-size: 18px;
+    line-height: 1.2;
+    color: darken($white, 7%);
+    font-weight: 300;
+  }
+
+  .bio {
+    margin: 8px 0 0;
+    color: $white;
+  }
 }

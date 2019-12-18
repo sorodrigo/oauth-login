@@ -58,8 +58,8 @@ function Admin(props: Props) {
       </nav>
       <section className={styles.admin}>
         <Suspense fallback={null}>
-          {section === 'dashboard' && <Dashboard />}
-          {section === 'settings' && <Settings />}
+          {section === 'dashboard' && <Dashboard details={details} />}
+          {section === 'settings' && <Settings details={details} />}
         </Suspense>
       </section>
     </>
