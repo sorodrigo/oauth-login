@@ -11,10 +11,10 @@ const pages: { [name: string]: React.ElementType } = {
   admin: React.lazy(() => import('./components/Admin/admin.container'))
 };
 
-const messages: { [type: string]: { code?: number; text: string } } = {
+const messages: { [type: string]: { code?: number; text: string; redirectTo?: string } } = {
   [NOT_FOUND]: { code: 404, text: 'page not found.' },
   callback: { text: 'loading...' },
-  forbidden: { code: 403, text: 'forbidden' }
+  forbidden: { code: 403, text: 'forbidden', redirectTo: 'home' }
 };
 
 const App: React.FC = () => {

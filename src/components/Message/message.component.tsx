@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { redirect } from 'redux-first-router';
 import styles from './message.module.scss';
 
 type Props = {
-  code: number,
-  text: string
+  code: number;
+  text: string;
+  redirectTo: string;
 };
 
 function Message(props: Props) {
-  const { code, text } = props;
+  const { code, text, redirectTo } = props;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const timeout = setTimeout(() => dispatch(redirect({ type: redirectTo })), 1000);
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [redirectTo, dispatch]);
   return (
     <section className={styles.message}>
       <div className={styles.container}>
