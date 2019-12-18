@@ -10,3 +10,5 @@ This app is runs on top of Now.sh serverless deployments. The frontend retrieves
     - client_id as `@app-client-id`
     - client_secret as `@app-client-secret`
     - redirect_uri as `@app-redirect-url`
+
+![oauth-login.gif](sneak peek)
