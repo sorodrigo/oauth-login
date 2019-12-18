@@ -1,27 +1,38 @@
 import { AnyAction } from 'redux';
 import { batch } from 'react-redux';
-import { redirect } from "redux-first-router";
+import { redirect } from 'redux-first-router';
 
 const USER__SET_TOKEN = 'USER__SET_TOKEN';
 const USER__SET_DETAILS = 'USER__SET_DETAILS';
+const USER__SET_REPOS = 'USER__SET_REPOS';
 
 export type UserDetails = {
-  login: string,
-  avatar_url: string,
-  bio: string,
-  name: string | null,
-  repos_url: string,
-  html_url: string
+  login: string;
+  avatar_url: string;
+  bio: string;
+  name: string | null;
+  repos_url: string;
+  html_url: string;
+};
+
+export type UserRepo = {
+  id: number;
+  full_name: string;
+  description: string;
+  html_url: string;
+  stargazers_count: number;
 };
 
 type UserState = {
-  token: string | null,
-  details: UserDetails | null
+  token: string | null;
+  details: UserDetails | null;
+  repos: Array<UserRepo>;
 };
 
 const initialState: UserState = {
   token: null,
-  details: null
+  details: null,
+  repos: []
 };
 
 export default function reducer(state = initialState, action: AnyAction) {
@@ -31,6 +42,14 @@ export default function reducer(state = initialState, action: AnyAction) {
     }
     case USER__SET_DETAILS: {
       return { ...state, details: action.payload };
+    }
+    case USER__SET_REPOS: {
+      return {
+        ...state,
+        repos: [...action.payload].sort(
+          (a: UserRepo, b: UserRepo) => b.stargazers_count - a.stargazers_count
+        )
+      };
     }
     default:
       return state;
@@ -42,9 +61,14 @@ const setToken = (token: string) => ({
   payload: token
 });
 
-const setDetails = (details: string) => ({
+const setDetails = (details: UserDetails) => ({
   type: USER__SET_DETAILS,
   payload: details
+});
+
+const setRepos = (repos: Array<UserRepo>) => ({
+  type: USER__SET_REPOS,
+  payload: repos
 });
 
 export const getToken = (code: number, state: string) => (dispatch: any) =>
@@ -56,18 +80,31 @@ export const getToken = (code: number, state: string) => (dispatch: any) =>
     })
   })
     .then(res => res.json())
-    .then(data => batch(() => {
-      dispatch(setToken(data));
-      dispatch(redirect({ type: 'dashboard' }));
-    }));
+    .then(data =>
+      batch(() => {
+        dispatch(setToken(data));
+        dispatch(redirect({ type: 'dashboard' }));
+      })
+    );
 
 export const getDetails = () => (dispatch: any, getState: any) => {
   const { user } = getState();
   fetch('https://api.github.com/user', {
     headers: {
-      'Authorization': `Bearer ${user.token}`
+      Authorization: `Bearer ${user.token}`
     }
   })
     .then(res => res.json())
     .then(data => dispatch(setDetails(data)));
+};
+
+export const getRepos = () => (dispatch: any, getState: any) => {
+  const { user } = getState();
+  fetch(`https://api.github.com/user/repos`, {
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  })
+    .then(res => res.json())
+    .then(data => dispatch(setRepos(data)));
 };

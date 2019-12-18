@@ -1,8 +1,8 @@
 @import 'styles/settings';
 
 .settings {
-  height: 100vh;
-  padding: 62px 0;
+  height: 80vh;
+  padding: 62px 0 0;
   background-color: $dark-fill;
 }
 
@@ -10,6 +10,8 @@
   margin: auto;
   background-color: $dark-accent;
   width: 275px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 
   .avatar {
     height: 275px;

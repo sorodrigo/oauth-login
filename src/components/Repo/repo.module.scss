@@ -1,0 +1,50 @@
+@import 'styles/settings';
+
+.repo {
+  display: block;
+  border: solid 1px $dark-accent;
+  border-radius: 6px;
+  padding: 18px;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($white, 0.1);
+  }
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stars {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 8px 0 0;
+  line-height: 1.2;
+  color: darken($white, 7%);
+  flex-shrink: 0;
+}
+
+.name {
+  display: block;
+  font-size: 16px;
+  color: $white;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.description {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: $white;
+  font-weight: 400;
+}

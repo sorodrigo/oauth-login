@@ -3,7 +3,7 @@ import styles from './admin.module.scss';
 import { UserDetails } from '../../user';
 import { NavLink } from 'redux-first-router-link';
 
-const Dashboard = React.lazy(() => import('../Dashboard/dashboard.component'));
+const Dashboard = React.lazy(() => import('../Dashboard/dashboard.container'));
 const Settings = React.lazy(() => import('../Settings/settings.component'));
 
 type Props = {
@@ -29,14 +29,14 @@ function Admin(props: Props) {
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            dashboard
+            Dashboard
           </NavLink>
           <NavLink
             to={{ type: 'settings' }}
             className={styles.link}
             activeClassName={styles.activeLink}
           >
-            settings
+            Settings
           </NavLink>
         </div>
         {details && (
@@ -58,7 +58,7 @@ function Admin(props: Props) {
       </nav>
       <section className={styles.admin}>
         <Suspense fallback={null}>
-          {section === 'dashboard' && <Dashboard details={details} />}
+          {section === 'dashboard' && <Dashboard />}
           {section === 'settings' && <Settings details={details} />}
         </Suspense>
       </section>
