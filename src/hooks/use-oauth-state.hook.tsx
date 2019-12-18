@@ -5,7 +5,8 @@ export function useOAuthState(): string | null {
   let [state, setState] = useState<string | null>(localStorage.getItem(key));
   useEffect(() => {
     const LOST_TV_SHOW_NUMBERS = 4815162342;
-    const hasExpired = state && Number(atob(state).split('_')[0]) < Date.now() - 120000;
+    const TIMEOUT = 599999; // 10 min matching github's code expiry time
+    const hasExpired = state && Number(atob(state).split('_')[0]) < Date.now() - TIMEOUT;
 
     // if it doesnt exist or it has expired we create a new state
     if (!state || hasExpired) {
