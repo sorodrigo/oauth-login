@@ -11,4 +11,4 @@ This app is runs on top of Now.sh serverless deployments. The frontend retrieves
     - client_secret as `@app-client-secret`
     - redirect_uri as `@app-redirect-url`
 
-![oauth-login.gif](sneak peek)
+![sneak-peek](https://raw.githubusercontent.com/sorodrigo/oauth-login/master/oauth-login.gif)
