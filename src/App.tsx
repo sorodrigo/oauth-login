@@ -25,7 +25,7 @@ const App: React.FC = () => {
   const isValidQuery = query.state === oAuthState;
 
   useEffect(() => {
-    if (isValidQuery && typeof query.code === 'number' && typeof query.state === 'string') {
+    if (isValidQuery && typeof query.code === 'string' && typeof query.state === 'string') {
       dispatch(getToken(query.code, query.state));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

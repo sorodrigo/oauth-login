@@ -73,7 +73,7 @@ const setRepos = (repos: Array<UserRepo>) => ({
   payload: repos
 });
 
-export const getToken = (code: number, state: string) => (
+export const getToken = (code: string, state: string) => (
   dispatch: ThunkDispatch<AppState, any, AnyAction>
 ) =>
   fetch('https://oauth-login.now.sh/proxy', {
